@@ -6,6 +6,18 @@ import os
 # EVIDENCE ACQUISITION
 # =========================================
 
+def scan_evidence_folder(folder):
+
+    files = []
+
+    for file in os.listdir(folder):
+        path = os.path.join(folder, file)
+
+        if os.path.isfile(path):
+            files.append(path)
+
+    return files
+
 def acquire_evidence(file_path):
     if not os.path.exists(file_path):
         print(f"Error: {file_path} does not exist.")
