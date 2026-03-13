@@ -1,0 +1,3 @@
+This is a dummy suspect file used for testing the digital forensics pipeline.
+It contains simulated sensitive data.
+CONFIDENTIAL: Do not distribute.
