@@ -1,3 +1,4 @@
 psutil==6.0.0
 fpdf==1.7.2
 blake3==0.4.1
+customtkinter==5.2.2
