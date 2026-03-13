@@ -28,15 +28,15 @@ def main():
     create_database()
 
     print(f"\nScanning Evidence Folder: {evidence_folder}")
-    files_to_acquire = scan_evidence_folder(evidence_folder)
+    files = scan_evidence_folder("data")
     
-    if not files_to_acquire:
+    if not files:
         print(f"No files found in {evidence_folder}.")
         return
 
-    for evidence_file in files_to_acquire:
-        print(f"\n[{evidence_file}] Acquiring Evidence...")
-        evidence = acquire_evidence(evidence_file)
+    for file in files:
+        print(f"\n[{file}] Acquiring Evidence...")
+        evidence = acquire_evidence(file)
         
         if evidence:
             log_action(evidence["file_name"], "Evidence Acquired", "Swastik Garg")
