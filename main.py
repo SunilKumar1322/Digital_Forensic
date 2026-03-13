@@ -1,4 +1,5 @@
 import os
+import logging
 from database.db_setup import create_database, log_action, store_hash
 from evidence.acquisition import acquire_evidence, scan_evidence_folder
 from evidence.metadata import extract_metadata
@@ -11,6 +12,16 @@ from reports.report_generator import generate_report
 # =========================================
 # MAIN PROGRAM
 # =========================================
+
+# Ensure log directory exists before setting up basicConfig
+if not os.path.exists('logs'):
+    os.makedirs('logs')
+
+logging.basicConfig(
+    filename="logs/forensic.log",
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
 
 def main():
     evidence_folder = "data"
@@ -25,22 +36,27 @@ def main():
             f.write("This is a dummy suspect file used for testing the digital forensics pipeline.\nIt contains simulated sensitive data.\nCONFIDENTIAL: Do not distribute.\n")
 
     print("Initializing Database...")
+    logging.info("Initializing SQLite forensics database...")
     create_database()
 
     print(f"\nScanning Evidence Folder: {evidence_folder}")
+    logging.info(f"Scanning Evidence Folder: {evidence_folder}")
     files = scan_evidence_folder("data")
     
     if not files:
         print(f"No files found in {evidence_folder}.")
+        logging.warning(f"No files found in {evidence_folder}.")
         return
 
     for file in files:
         print(f"\n[{file}] Acquiring Evidence...")
+        logging.info(f"Acquiring Evidence for file: {file}")
         evidence = acquire_evidence(file, case_id="CASE-2026-001", location="Server Room A", officer_id="OFF-8942")
         
         if evidence:
             log_action(evidence["file_name"], "Evidence Acquired", evidence["officer_id"])
             store_hash(evidence)
+            logging.info(f"Successfully logged hashes and custody for {evidence['file_name']}")
 
             metadata = extract_metadata(file)
             memory_info = capture_memory_info()
@@ -53,6 +69,7 @@ def main():
             report_name = f"forensic_report_{evidence['file_name']}.pdf"
             report_path = os.path.join("reports", report_name)
             generate_report(evidence, metadata, memory_info, integrity_result, output_file=report_path)
+            logging.info(f"Generated PDF Report: {report_path}")
 
             print("\n" + "="*40)
             print("EVIDENCE INFORMATION")
@@ -78,8 +95,10 @@ def main():
             print(integrity_result)
         else:
             print(f"Could not acquire evidence for {file}.")
+            logging.error(f"Could not acquire evidence for {file}.")
             
     print("\nCompleted scanning and acquisition.")
+    logging.info("Completed scanning and acquisition process.")
 
 if __name__ == "__main__":
     main()

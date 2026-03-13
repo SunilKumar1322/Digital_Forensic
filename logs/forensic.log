@@ -1,0 +1,6 @@
+2026-03-14 00:03:54,136 - INFO - Initializing SQLite forensics database...
+2026-03-14 00:03:54,138 - INFO - Scanning Evidence Folder: data
+2026-03-14 00:03:54,139 - INFO - Acquiring Evidence for file: data\suspect_file.txt
+2026-03-14 00:03:54,357 - INFO - Successfully logged hashes and custody for suspect_file.txt
+2026-03-14 00:03:54,363 - INFO - Generated PDF Report: reports\forensic_report_suspect_file.txt.pdf
+2026-03-14 00:03:54,363 - INFO - Completed scanning and acquisition process.
