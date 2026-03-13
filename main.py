@@ -52,7 +52,7 @@ def main():
             
             report_name = f"forensic_report_{evidence['file_name']}.pdf"
             report_path = os.path.join("reports", report_name)
-            generate_report(evidence, output_file=report_path)
+            generate_report(evidence, metadata, memory_info, integrity_result, output_file=report_path)
 
             print("\n" + "="*40)
             print("EVIDENCE INFORMATION")
