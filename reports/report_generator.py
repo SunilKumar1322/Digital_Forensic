@@ -11,6 +11,7 @@ def generate_report(evidence, output_file="forensic_report.pdf"):
     pdf.cell(200, 10, f"Officer ID: {evidence.get('officer_id', 'N/A')}", ln=True)
     pdf.cell(200, 10, f"File Name: {evidence['file_name']}", ln=True)
     pdf.cell(200, 10, f"File Path: {evidence['file_path']}", ln=True)
+    pdf.cell(200, 10, f"File Size: {evidence['file_size']} bytes", ln=True)
     pdf.cell(200, 10, f"SHA256 Hash: {evidence['sha256_hash']}", ln=True)
     pdf.cell(200, 10, f"BLAKE3 Hash: {evidence['blake3_hash']}", ln=True)
 

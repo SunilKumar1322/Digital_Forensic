@@ -24,6 +24,7 @@ def create_database():
     CREATE TABLE IF NOT EXISTS evidence_hash(
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         file_name TEXT,
+        file_size INTEGER,
         sha256_hash TEXT,
         blake3_hash TEXT,
         case_id TEXT,
@@ -54,9 +55,9 @@ def store_hash(evidence):
     cursor = conn.cursor()
 
     cursor.execute("""
-    INSERT INTO evidence_hash(file_name, sha256_hash, blake3_hash, case_id, location, officer_id)
-    VALUES (?, ?, ?, ?, ?, ?)
-    """, (evidence["file_name"], evidence["sha256_hash"], evidence["blake3_hash"], evidence.get("case_id"), evidence.get("location"), evidence.get("officer_id")))
+    INSERT INTO evidence_hash(file_name, file_size, sha256_hash, blake3_hash, case_id, location, officer_id)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, (evidence["file_name"], evidence["file_size"], evidence["sha256_hash"], evidence["blake3_hash"], evidence.get("case_id"), evidence.get("location"), evidence.get("officer_id")))
 
     conn.commit()
     conn.close()

@@ -32,6 +32,7 @@ def acquire_evidence(file_path, case_id="UNKNOWN", location="UNKNOWN", officer_i
     evidence = {
         "file_name": os.path.basename(file_path),
         "file_path": os.path.abspath(file_path),
+        "file_size": os.path.getsize(file_path),
         "sha256_hash": sha256_hash,
         "blake3_hash": blake3_hash,
         "case_id": case_id,
