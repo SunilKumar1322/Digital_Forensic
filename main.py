@@ -13,11 +13,9 @@ from reports.report_generator import generate_report
 # =========================================
 
 def main():
-    evidence_file = "data/suspect_file.txt"
+    evidence_file = "suspect_file.txt"
     
     # Ensure our dummy file exists for the test script
-    if not os.path.exists('data'):
-        os.makedirs('data')
     if not os.path.exists(evidence_file):
         with open(evidence_file, 'w') as f:
             f.write("This is a dummy suspect file used for testing the digital forensics pipeline.\nIt contains simulated sensitive data.\nCONFIDENTIAL: Do not distribute.\n")
