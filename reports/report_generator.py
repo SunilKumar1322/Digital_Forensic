@@ -6,6 +6,9 @@ def generate_report(evidence, output_file="forensic_report.pdf"):
     pdf.set_font("Arial", size=12)
 
     pdf.cell(200, 10, "Digital Forensic Evidence Report", ln=True)
+    pdf.cell(200, 10, f"Case ID: {evidence.get('case_id', 'N/A')}", ln=True)
+    pdf.cell(200, 10, f"Location: {evidence.get('location', 'N/A')}", ln=True)
+    pdf.cell(200, 10, f"Officer ID: {evidence.get('officer_id', 'N/A')}", ln=True)
     pdf.cell(200, 10, f"File Name: {evidence['file_name']}", ln=True)
     pdf.cell(200, 10, f"File Path: {evidence['file_path']}", ln=True)
     pdf.cell(200, 10, f"SHA256 Hash: {evidence['sha256_hash']}", ln=True)

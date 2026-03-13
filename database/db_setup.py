@@ -26,6 +26,9 @@ def create_database():
         file_name TEXT,
         sha256_hash TEXT,
         blake3_hash TEXT,
+        case_id TEXT,
+        location TEXT,
+        officer_id TEXT,
         timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
     )
     """)
@@ -51,9 +54,9 @@ def store_hash(evidence):
     cursor = conn.cursor()
 
     cursor.execute("""
-    INSERT INTO evidence_hash(file_name, sha256_hash, blake3_hash)
-    VALUES (?, ?, ?)
-    """, (evidence["file_name"], evidence["sha256_hash"], evidence["blake3_hash"]))
+    INSERT INTO evidence_hash(file_name, sha256_hash, blake3_hash, case_id, location, officer_id)
+    VALUES (?, ?, ?, ?, ?, ?)
+    """, (evidence["file_name"], evidence["sha256_hash"], evidence["blake3_hash"], evidence.get("case_id"), evidence.get("location"), evidence.get("officer_id")))
 
     conn.commit()
     conn.close()

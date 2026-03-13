@@ -36,10 +36,10 @@ def main():
 
     for file in files:
         print(f"\n[{file}] Acquiring Evidence...")
-        evidence = acquire_evidence(file)
+        evidence = acquire_evidence(file, case_id="CASE-2026-001", location="Server Room A", officer_id="OFF-8942")
         
         if evidence:
-            log_action(evidence["file_name"], "Evidence Acquired", "Swastik Garg")
+            log_action(evidence["file_name"], "Evidence Acquired", evidence["officer_id"])
             store_hash(evidence)
 
             metadata = extract_metadata(file)

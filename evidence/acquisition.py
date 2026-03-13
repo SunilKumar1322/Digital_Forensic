@@ -18,7 +18,7 @@ def scan_evidence_folder(folder):
 
     return files
 
-def acquire_evidence(file_path):
+def acquire_evidence(file_path, case_id="UNKNOWN", location="UNKNOWN", officer_id="UNKNOWN"):
     if not os.path.exists(file_path):
         print(f"Error: {file_path} does not exist.")
         return None
@@ -33,7 +33,10 @@ def acquire_evidence(file_path):
         "file_name": os.path.basename(file_path),
         "file_path": os.path.abspath(file_path),
         "sha256_hash": sha256_hash,
-        "blake3_hash": blake3_hash
+        "blake3_hash": blake3_hash,
+        "case_id": case_id,
+        "location": location,
+        "officer_id": officer_id
     }
 
     return evidence
