@@ -1,5 +1,5 @@
 import os
-from database.db_setup import create_database, log_action, log_evidence
+from database.db_setup import create_database, log_action, store_hash
 from evidence.acquisition import acquire_evidence
 from evidence.metadata import extract_metadata
 from evidence.integrity import verify_integrity
@@ -30,7 +30,7 @@ def main():
     
     if evidence:
         log_action(evidence["file_name"], "Evidence Acquired", "Swastik Garg")
-        log_evidence(evidence["file_name"], evidence["sha256_hash"], evidence["blake3_hash"])
+        store_hash(evidence)
 
         metadata = extract_metadata(evidence_file)
         memory_info = capture_memory_info()

@@ -45,14 +45,15 @@ def log_action(evidence_name, action, investigator):
     conn.commit()
     conn.close()
 
-def log_evidence(file_name, sha256_hash, blake3_hash):
-    conn = sqlite3.connect(DB_NAME)
+def store_hash(evidence):
+
+    conn = sqlite3.connect("forensics.db")
     cursor = conn.cursor()
 
     cursor.execute("""
     INSERT INTO evidence_hash(file_name, sha256_hash, blake3_hash)
     VALUES (?, ?, ?)
-    """, (file_name, sha256_hash, blake3_hash))
+    """, (evidence["file_name"], evidence["sha256_hash"], evidence["blake3_hash"]))
 
     conn.commit()
     conn.close()
