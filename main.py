@@ -42,7 +42,7 @@ def main():
             log_action(evidence["file_name"], "Evidence Acquired", "Swastik Garg")
             store_hash(evidence)
 
-            metadata = extract_metadata(evidence_file)
+            metadata = extract_metadata(file)
             memory_info = capture_memory_info()
             integrity_result = verify_integrity(evidence)
 
@@ -77,7 +77,7 @@ def main():
             print("="*40)
             print(integrity_result)
         else:
-            print(f"Could not acquire evidence for {evidence_file}.")
+            print(f"Could not acquire evidence for {file}.")
             
     print("\nCompleted scanning and acquisition.")
 
